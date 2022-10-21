@@ -7,13 +7,23 @@ import {
   Container,
   Avatar,
 } from "@mui/material";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import SideMenu from "./components/SideMenu";
+import MenuIcon from "@mui/icons-material/Menu";
+import PopMenu from "./components/PopMenu";
 
 const DashboardLayout = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar position="absolute">
         <Toolbar sx={{ pr: "24px" }}>
+          <Box px={2} mt={0.5} sx={{ cursor: "pointer" }}>
+            <MenuIcon sx={{ color: "white" }} onClick={() => setOpen(true)} />
+          </Box>
+
           <Typography
             component="h1"
             variant="h6"
@@ -23,12 +33,11 @@ const DashboardLayout = () => {
           >
             Pilar Tecno Web
           </Typography>
-          <IconButton size="small" sx={{ ml: 2 }}>
-            <Avatar sx={{ width: 32, height: 32 }}>C</Avatar>
-          </IconButton>
+          <PopMenu />
         </Toolbar>
       </AppBar>
 
+      <SideMenu open={open} onClose={() => setOpen(false)} />
       <Box
         component="main"
         sx={{
