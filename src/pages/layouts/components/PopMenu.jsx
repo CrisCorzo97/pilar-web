@@ -6,7 +6,7 @@ import {
   MenuItem as MenuItemMui,
 } from "@mui/material";
 import { useRef, useState } from "react";
-import { useNavigate, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { popMenu } from "../../../constants/menu";
 import MenuPopover from "./MenuPopover";
 

@@ -1,12 +1,4 @@
-import {
-  AppBar,
-  Toolbar,
-  Box,
-  Typography,
-  IconButton,
-  Container,
-  Avatar,
-} from "@mui/material";
+import { AppBar, Toolbar, Box, Typography, Container } from "@mui/material";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import SideMenu from "./components/SideMenu";
