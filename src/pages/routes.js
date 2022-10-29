@@ -4,6 +4,7 @@ import Dashboard from "./dashboard/Dashboard";
 import NotFound from "./layouts/NotFound";
 import Todo from "./todo/Todo";
 import FetchList from "./fetchlist/FetchList";
+import TaskForm from "./TaskForm/TaskForm";
 
 const Routes = () => {
   return useRoutes([
@@ -13,6 +14,7 @@ const Routes = () => {
       children: [
         { path: "", element: <Dashboard /> },
         { path: "todo", element: <Todo /> },
+        { path: "task-form/:id", element: <TaskForm /> },
         { path: "fetch-list", element: <FetchList /> },
       ],
     },
