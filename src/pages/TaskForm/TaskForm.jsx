@@ -11,9 +11,10 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTask } from "../../redux/slides/taskSlide";
+import { addTask, editTask } from "../../redux/slides/taskSlide";
 import { v4 as uuid } from "uuid";
 import { useNavigate, useParams } from "react-router-dom";
+import { PAGES_ROUTES } from "../../constants/routes.constants";
 
 const TaskForm = () => {
   const [task, setTask] = useState({
@@ -64,14 +65,24 @@ const TaskForm = () => {
         ...error,
         description: "Debes escribir una description.",
       });
-    else
+    else if (id) {
+      dispatch(
+        editTask({
+          id: id,
+          name: task.name,
+          description: task.description,
+          done: task.done,
+        })
+      );
+    } else {
       dispatch(
         addTask({
           ...task,
           id: uuid(),
         })
       );
-    return navigate("/todo", { replace: true });
+    }
+    return navigate(`/${PAGES_ROUTES.TODO}`, { replace: true });
   };
 
   return (
@@ -120,7 +131,7 @@ const TaskForm = () => {
               size="large"
               onClick={handleSubmit}
             >
-              Agregar
+              {id ? "Actualizar" : "Agregar"}
             </Button>
           </Grid>
         </Stack>

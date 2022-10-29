@@ -4,7 +4,8 @@ import Dashboard from "./dashboard/Dashboard";
 import NotFound from "./layouts/NotFound";
 import Todo from "./todo/Todo";
 import FetchList from "./fetchlist/FetchList";
-import TaskForm from "./TaskForm/TaskForm";
+import TaskForm from "./taskForm/TaskForm";
+import { PAGES_ROUTES } from "../constants/routes.constants";
 
 const Routes = () => {
   return useRoutes([
@@ -13,9 +14,10 @@ const Routes = () => {
       element: <DashboardLayout />,
       children: [
         { path: "", element: <Dashboard /> },
-        { path: "todo", element: <Todo /> },
-        { path: "task-form/:id", element: <TaskForm /> },
-        { path: "fetch-list", element: <FetchList /> },
+        { path: PAGES_ROUTES.TODO, element: <Todo /> },
+        { path: PAGES_ROUTES.CREATE_TASK, element: <TaskForm /> },
+        { path: `${PAGES_ROUTES.EDIT_TASK}/:id`, element: <TaskForm /> },
+        { path: PAGES_ROUTES.FETCH_LIST, element: <FetchList /> },
       ],
     },
     { path: "/404", element: <NotFound /> },

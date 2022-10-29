@@ -11,8 +11,9 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteTask } from "../../redux/slides/taskSlide";
+import { deleteTask, editTask } from "../../redux/slides/taskSlide";
 import { theme } from "../../theme";
+import { PAGES_ROUTES } from "../../constants/routes.constants";
 
 const Todo = () => {
   const tasks = useSelector((state) => state.tasks);
@@ -21,7 +22,7 @@ const Todo = () => {
   const dispatch = useDispatch();
 
   const handleGoToForm = () => {
-    navigate("/task-form", { replace: true });
+    navigate(`/${PAGES_ROUTES.CREATE_TASK}`, { replace: true });
   };
 
   const handleDelete = (id) => {
@@ -29,7 +30,11 @@ const Todo = () => {
   };
 
   const handleGoToEdit = (id) => {
-    navigate(`/task-form/${id}`, { replace: true });
+    navigate(`/${PAGES_ROUTES.EDIT_TASK}/${id}`, { replace: true });
+  };
+
+  const handleSwitch = (task) => {
+    dispatch(editTask({ ...task, done: !task.done }));
   };
 
   return (
@@ -52,9 +57,14 @@ const Todo = () => {
       <Grid container gridTemplateColumns={4} columnGap={3} rowGap={3}>
         {tasks.map((task) => (
           <Card sx={{ minWidth: 250, borderRadius: 2 }} key={task.id}>
-            <CardHeader title={task.name} />
+            <CardHeader
+              title={task.name}
+              sx={{ borderBottom: "1px solid lightgray" }}
+            />
             <CardContent>
-              <Typography variant="body1">{task.description}</Typography>
+              <Typography variant="body1" mb={2}>
+                {task.description}
+              </Typography>
               <Box
                 sx={{
                   display: "flex",
@@ -63,7 +73,11 @@ const Todo = () => {
                 }}
               >
                 <Typography variant="body2">Completada</Typography>
-                <Switch checked={task.done} defaultChecked color="secondary" />
+                <Switch
+                  checked={task.done}
+                  onChange={() => handleSwitch(task)}
+                  color="secondary"
+                />
               </Box>
             </CardContent>
             <CardActions
