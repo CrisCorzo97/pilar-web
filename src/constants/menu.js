@@ -1,3 +1,5 @@
+import { PAGES_ROUTES } from "./routes.constants";
+
 export const drawerMenu = [
   {
     title: "inicio",
@@ -8,11 +10,11 @@ export const drawerMenu = [
     children: [
       {
         title: "todo",
-        path: "/todo",
+        path: `/${PAGES_ROUTES.TODO}`,
       },
       {
         title: "fetchList",
-        path: "/fetch-list",
+        path: `/${PAGES_ROUTES.FETCH_LIST}`,
       },
     ],
   },
